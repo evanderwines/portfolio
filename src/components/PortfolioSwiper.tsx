@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { A11y, Keyboard, Mousewheel } from 'swiper/modules'
 import type { Swiper as SwiperInstance } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 import { AboutSlide } from './AboutSlide'
 import { ContactSlide } from './ContactSlide'
 import { ExperienceSlide } from './ExperienceSlide'
@@ -20,6 +21,8 @@ const slides = [
 export function PortfolioSwiper() {
 	const [activeIndex, setActiveIndex] = useState(0)
 	const [swiper, setSwiper] = useState<SwiperInstance | null>(null)
+	const isFirstSlide = activeIndex === 0
+	const isLastSlide = activeIndex === slides.length - 1
 
 	return (
 		<main className="min-h-svh overflow-hidden bg-[radial-gradient(circle_at_10%_14%,rgba(26,115,232,0.11),transparent_26rem),radial-gradient(circle_at_92%_86%,rgba(245,158,66,0.12),transparent_24rem),linear-gradient(120deg,#f7fbff_0%,#ffffff_52%,#f9fafb_100%)] text-[#374151]">
@@ -101,6 +104,30 @@ export function PortfolioSwiper() {
 				))}
 			</div>
 
+			<div
+				aria-label="Mobile slide controls"
+				className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 min-[981px]:hidden"
+			>
+				<button
+					aria-label="Previous section"
+					className={`grid size-10 place-items-center rounded-full border border-slate-700/10 bg-white/92 text-[#1A73E8] shadow-[0_12px_28px_rgba(15,23,42,0.16)] backdrop-blur transition ${isFirstSlide ? 'opacity-35' : 'cursor-pointer active:scale-95'}`}
+					disabled={isFirstSlide}
+					onClick={() => swiper?.slidePrev()}
+					type="button"
+				>
+					<ChevronUp className="size-5" />
+				</button>
+				<button
+					aria-label="Next section"
+					className={`grid size-10 place-items-center rounded-full border border-slate-700/10 bg-[#1A73E8] text-white shadow-[0_12px_28px_rgba(26,115,232,0.28)] transition ${isLastSlide ? 'opacity-35' : 'cursor-pointer active:scale-95'}`}
+					disabled={isLastSlide}
+					onClick={() => swiper?.slideNext()}
+					type="button"
+				>
+					<ChevronDown className="size-5" />
+				</button>
+			</div>
+
 			<Swiper
 				a11y={{ enabled: true }}
 				className="h-svh w-full"
@@ -114,8 +141,12 @@ export function PortfolioSwiper() {
 				}}
 				onSlideChange={(instance) => setActiveIndex(instance.activeIndex)}
 				onSwiper={setSwiper}
+				resistanceRatio={0.25}
 				slidesPerView={1}
 				speed={650}
+				threshold={6}
+				touchReleaseOnEdges
+				touchStartPreventDefault={false}
 			>
 				{slides.map((slide) => (
 					<SwiperSlide className="!h-full overflow-y-auto overscroll-contain" key={slide.id}>

@@ -1,7 +1,7 @@
 export const portfolio = {
 	personal: {
 		name: 'Evander V. Wines',
-		address: 'M79 St. Sta. Lucia, Pasig City',
+		address: '09684880460',
 		email: 'winesevander@gmail.com',
 		github: 'https://github.com/evanderwines',
 	},

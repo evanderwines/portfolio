@@ -8,7 +8,7 @@ const statIcons = [GraduationCap, Trophy, Code]
 export function HeroSlide() {
 	return (
 		<section
-			className="relative min-h-svh overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(26,115,232,0.13),transparent_36%),linear-gradient(135deg,#F7FBFF_0%,#FFFFFF_52%,#F8FAFC_100%)] px-[72px] pb-12 pt-32 max-[1200px]:px-9 max-[980px]:px-[18px] max-[980px]:pb-[92px] max-[980px]:pt-9"
+			className="relative min-h-svh overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(26,115,232,0.13),transparent_36%),linear-gradient(135deg,#F7FBFF_0%,#FFFFFF_52%,#F8FAFC_100%)] px-[72px] pb-12 pt-32 max-[1200px]:px-9 max-[980px]:px-[18px] max-[980px]:pb-8 max-[980px]:pt-9"
 			aria-label="Portfolio intro"
 		>
 			<div className="mx-auto mb-10 grid w-full max-w-[1480px] grid-cols-[minmax(0,0.95fr)_minmax(460px,1fr)] items-center gap-16 max-[1024px]:grid-cols-1 max-[1024px]:gap-10 max-[560px]:mb-6 max-[560px]:gap-7">

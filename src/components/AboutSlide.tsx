@@ -6,7 +6,7 @@ export function AboutSlide() {
 
 	return (
 		<section
-			className="relative flex min-h-svh items-center overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(26,115,232,0.13),transparent_34%),linear-gradient(135deg,#F7FBFF_0%,#FFFFFF_52%,#F8FAFC_100%)] px-[72px] pb-16 pt-32 max-[1200px]:px-9 max-[980px]:px-[18px] max-[980px]:pb-[92px] max-[980px]:pt-9"
+			className="relative flex min-h-svh items-center overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(26,115,232,0.13),transparent_34%),linear-gradient(135deg,#F7FBFF_0%,#FFFFFF_52%,#F8FAFC_100%)] px-[72px] pb-16 pt-32 max-[1200px]:px-9 max-[980px]:px-[18px] max-[980px]:pb-8 max-[980px]:pt-9"
 			aria-label="About me"
 		>
 			<div className="pointer-events-none absolute bottom-0 left-0 h-[260px] w-[58%] rounded-tr-[100%] bg-[#1A73E8]/5 max-[560px]:hidden" />

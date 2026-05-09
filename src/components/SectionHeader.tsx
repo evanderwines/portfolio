@@ -18,7 +18,7 @@ export function SectionHeader({
         {title}
       </h2>
       {description ? (
-        <p className="m-0 max-w-[58ch] text-[1.22rem] leading-[1.75] text-[#5E6A7D] max-[560px]:text-[0.98rem] max-[560px]:leading-[1.6]">
+        <p className="m-0 max-w-[58ch] text-[1.22rem] leading-[1.75] text-[#5E6A7D] max-[640px]:hidden">
           {description}
         </p>
       ) : null}

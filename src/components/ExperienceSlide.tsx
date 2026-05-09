@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import {
 	CalendarDays,
 	Medal,
@@ -16,12 +16,39 @@ function getCircularOffset(index: number, activeIndex: number, total: number) {
 
 export function ExperienceSlide() {
 	const [activeIndex, setActiveIndex] = useState(0)
+	const touchStartX = useRef<number | null>(null)
 	const competitions = portfolio.experience
 	const activeCompetition = competitions[activeIndex]
 
+	const showPrevious = () => {
+		setActiveIndex((current) => (current - 1 + competitions.length) % competitions.length)
+	}
+
+	const showNext = () => {
+		setActiveIndex((current) => (current + 1) % competitions.length)
+	}
+
+	const handleTouchEnd = (x: number) => {
+		if (touchStartX.current === null) {
+			return
+		}
+
+		const distance = x - touchStartX.current
+
+		if (Math.abs(distance) > 38) {
+			if (distance < 0) {
+				showNext()
+			} else {
+				showPrevious()
+			}
+		}
+
+		touchStartX.current = null
+	}
+
 	return (
 		<section
-			className="relative flex min-h-svh items-center overflow-hidden px-[72px] pb-12 pt-25 max-[1200px]:px-9 max-[980px]:px-[18px] max-[980px]:pb-[92px] max-[980px]:pt-9"
+			className="relative flex min-h-svh items-center overflow-hidden px-[72px] pb-12 pt-25 max-[1200px]:px-9 max-[980px]:px-[18px] max-[980px]:pb-8 max-[980px]:pt-9"
 			aria-label="Experience"
 		>
 			<div className="mx-auto grid w-[min(1420px,100%)] grid-cols-[minmax(0,0.95fr)_minmax(420px,1.05fr)] items-center gap-[70px] max-[1200px]:gap-10 max-[980px]:grid-cols-1">
@@ -33,8 +60,12 @@ export function ExperienceSlide() {
 
 				<div className="grid gap-5">
 					<div
-						className="relative min-h-[490px] px-6 py-7 max-[640px]:min-h-[560px] max-[560px]:px-0 max-[390px]:min-h-[585px]"
+						className="relative min-h-[490px] px-6 py-7 max-[640px]:min-h-[440px] max-[560px]:px-0 max-[390px]:min-h-[465px]"
 						aria-label="Competition carousel"
+						onTouchEnd={(event) => handleTouchEnd(event.changedTouches[0].clientX)}
+						onTouchStart={(event) => {
+							touchStartX.current = event.touches[0].clientX
+						}}
 					>
 						<p className="sr-only" aria-live="polite">
 							{activeCompetition.title}
@@ -58,7 +89,7 @@ export function ExperienceSlide() {
 
 								return (
 									<article
-										className={`absolute left-1/2 top-1/2 grid h-[440px] w-[min(92vw,390px)] origin-center overflow-hidden rounded-lg border p-7 text-left shadow-[0_24px_60px_rgba(0,0,0,0.28)] transition-all duration-500 ease-out max-[560px]:h-[485px] max-[560px]:p-5 ${isActive
+										className={`absolute left-1/2 top-1/2 grid h-[440px] w-[min(92vw,390px)] origin-center overflow-hidden rounded-lg border p-7 text-left shadow-[0_24px_60px_rgba(0,0,0,0.28)] transition-all duration-500 ease-out max-[560px]:h-[380px] max-[560px]:p-5 max-[390px]:h-[410px] ${isActive
 											? 'border-white bg-white text-[#0B1426]'
 											: 'border-white/20 bg-[#7EA0EA] text-white'
 											} ${!isActive ? 'max-[640px]:pointer-events-none max-[640px]:!opacity-0' : ''}`}
@@ -71,18 +102,18 @@ export function ExperienceSlide() {
 									>
 										<div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_12%,rgba(255,255,255,0.36),transparent_34%)]" />
 										<div className="relative z-10 grid content-between gap-6">
-											<div className="grid gap-5 max-[560px]:gap-4">
+											<div className="grid gap-5 max-[560px]:gap-3">
 												<div className="flex items-start justify-between gap-4">
 													<span
-														className={`grid size-12 shrink-0 place-items-center rounded-lg ${isActive
+														className={`grid size-12 shrink-0 place-items-center rounded-lg max-[560px]:size-10 ${isActive
 															? 'bg-[#1A73E8]/10 text-[#1A73E8]'
 															: 'bg-white/14 text-white'
 															}`}
 													>
 														{isHighlight ? (
-															<Trophy className="size-6" />
+															<Trophy className="size-6 max-[560px]:size-5" />
 														) : (
-															<Medal className="size-6" />
+															<Medal className="size-6 max-[560px]:size-5" />
 														)}
 													</span>
 													<span
@@ -103,23 +134,23 @@ export function ExperienceSlide() {
 														{item.organization}
 													</p>
 													<h4
-														className={`m-0 mt-3 text-[1.72rem] font-black leading-[1.08] tracking-normal max-[560px]:text-[1.34rem] ${isActive ? 'text-[#0B1426]' : 'text-white'
+														className={`m-0 mt-3 text-[1.72rem] font-black leading-[1.08] tracking-normal max-[560px]:mt-2 max-[560px]:text-[1.22rem] ${isActive ? 'text-[#0B1426]' : 'text-white'
 															}`}
 													>
 														{item.title}
 													</h4>
 												</div>
 
-												<div className="grid gap-2.5">
+												<div className="grid gap-2.5 max-[560px]:gap-1.5">
 													<p
-														className={`m-0 flex items-center gap-2 text-[0.94rem] font-bold ${isActive ? 'text-[#4B5565]' : 'text-white/86'
+														className={`m-0 flex items-center gap-2 text-[0.94rem] font-bold max-[560px]:text-[0.82rem] ${isActive ? 'text-[#4B5565]' : 'text-white/86'
 															}`}
 													>
 														<CalendarDays className="size-4 shrink-0" />
 														{item.date}
 													</p>
 													<p
-														className={`m-0 flex items-center gap-2 text-[0.94rem] font-bold ${isActive ? 'text-[#4B5565]' : 'text-white/86'
+														className={`m-0 flex items-center gap-2 text-[0.94rem] font-bold max-[560px]:text-[0.82rem] ${isActive ? 'text-[#4B5565]' : 'text-white/86'
 															}`}
 													>
 														<UserRound className="size-4 shrink-0" />
@@ -130,8 +161,8 @@ export function ExperienceSlide() {
 
 											{isActive ? (
 												<ul className="m-0 grid list-none gap-2.5 p-0 text-[0.92rem] leading-[1.38] text-[#5E6A7D] max-[560px]:gap-2 max-[560px]:text-[0.86rem]">
-													{item.details.map((detail) => (
-														<li className="flex gap-3" key={detail}>
+													{item.details.map((detail, detailIndex) => (
+														<li className={`flex gap-3 ${detailIndex > 1 ? 'max-[560px]:hidden' : ''}`} key={detail}>
 															<span className="mt-[0.58em] size-2 shrink-0 rounded-full bg-[#F59E42]" />
 															<span>{detail}</span>
 														</li>

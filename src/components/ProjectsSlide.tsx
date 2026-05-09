@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Code } from 'lucide-react'
 import cleverTravellerPreview from '../assets/projects/clever-traveller/1.png'
 import taskManagementPreview from '../assets/projects/task-mngmt/1.png'
@@ -27,12 +27,39 @@ function getCircularOffset(index: number, activeIndex: number, total: number) {
 
 export function ProjectsSlide() {
 	const [activeIndex, setActiveIndex] = useState(0)
+	const touchStartX = useRef<number | null>(null)
 	const projects = portfolio.projects
 	const activeProject = projects[activeIndex]
 
+	const showPrevious = () => {
+		setActiveIndex((current) => (current - 1 + projects.length) % projects.length)
+	}
+
+	const showNext = () => {
+		setActiveIndex((current) => (current + 1) % projects.length)
+	}
+
+	const handleTouchEnd = (x: number) => {
+		if (touchStartX.current === null) {
+			return
+		}
+
+		const distance = x - touchStartX.current
+
+		if (Math.abs(distance) > 38) {
+			if (distance < 0) {
+				showNext()
+			} else {
+				showPrevious()
+			}
+		}
+
+		touchStartX.current = null
+	}
+
 	return (
 		<section
-			className="relative flex min-h-svh items-center overflow-hidden px-[72px] pb-12 pt-25 max-[1200px]:px-9 max-[980px]:px-[18px] max-[980px]:pb-[92px] max-[980px]:pt-9"
+			className="relative flex min-h-svh items-center overflow-hidden px-[72px] pb-12 pt-25 max-[1200px]:px-9 max-[980px]:px-[18px] max-[980px]:pb-8 max-[980px]:pt-9"
 			aria-label="Projects"
 		>
 			<div className="mx-auto grid w-[min(1420px,100%)] grid-cols-[minmax(0,0.95fr)_minmax(420px,1.05fr)] items-center gap-[70px] max-[1200px]:gap-10 max-[980px]:grid-cols-1">
@@ -44,8 +71,12 @@ export function ProjectsSlide() {
 
 				<div className="grid gap-5">
 					<div
-						className="relative min-h-[560px] px-6 py-7 max-[640px]:min-h-[610px] max-[560px]:px-0 max-[390px]:min-h-[640px]"
+						className="relative min-h-[560px] px-6 py-7 max-[640px]:min-h-[485px] max-[560px]:px-0 max-[390px]:min-h-[510px]"
 						aria-label="Project carousel"
+						onTouchEnd={(event) => handleTouchEnd(event.changedTouches[0].clientX)}
+						onTouchStart={(event) => {
+							touchStartX.current = event.touches[0].clientX
+						}}
 					>
 						<p className="sr-only" aria-live="polite">
 							{activeProject.name}
@@ -61,7 +92,7 @@ export function ProjectsSlide() {
 
 								return (
 									<article
-										className={`absolute left-1/2 top-1/2 grid h-[500px] w-[min(92vw,450px)] origin-center overflow-hidden rounded-lg border text-left shadow-[0_24px_60px_rgba(0,0,0,0.24)] transition-all duration-500 ease-out max-[560px]:h-[535px] ${isActive
+										className={`absolute left-1/2 top-1/2 grid h-[500px] w-[min(92vw,450px)] origin-center overflow-hidden rounded-lg border text-left shadow-[0_24px_60px_rgba(0,0,0,0.24)] transition-all duration-500 ease-out max-[560px]:h-[425px] max-[390px]:h-[450px] ${isActive
 											? 'border-white bg-white text-[#0B1426]'
 											: 'border-white/20 bg-[#7EA0EA] text-white'
 											} ${!isActive ? 'max-[640px]:pointer-events-none max-[640px]:!opacity-0' : ''}`}
@@ -73,7 +104,7 @@ export function ProjectsSlide() {
 										}}
 									>
 										<div
-											className={`relative h-[205px] overflow-hidden max-[560px]:h-[150px] ${isActive ? 'bg-[#EEF4FF]' : 'bg-white/12'
+											className={`relative h-[205px] overflow-hidden max-[560px]:h-[115px] ${isActive ? 'bg-[#EEF4FF]' : 'bg-white/12'
 												}`}
 										>
 											<img
@@ -102,7 +133,7 @@ export function ProjectsSlide() {
 													{project.type}
 												</p>
 												<h3
-													className={`m-0 mt-3 text-[1.55rem] font-black leading-[1.08] tracking-normal max-[560px]:text-[1.22rem] ${isActive ? 'text-[#0B1426]' : 'text-white'
+													className={`m-0 mt-3 text-[1.55rem] font-black leading-[1.08] tracking-normal max-[560px]:mt-2 max-[560px]:text-[1.12rem] ${isActive ? 'text-[#0B1426]' : 'text-white'
 														}`}
 												>
 													{project.name}
@@ -111,15 +142,17 @@ export function ProjectsSlide() {
 
 											{isActive ? (
 												<>
-													<ul className="m-0 grid list-none gap-2 p-0 text-[0.9rem] leading-[1.35] text-[#5E6A7D] max-[560px]:text-[0.84rem]">
+													<ul className="m-0 grid list-none gap-2 p-0 text-[0.9rem] leading-[1.35] text-[#5E6A7D] max-[560px]:text-[0.8rem] max-[560px]:leading-[1.28]">
 														{project.description.map((detail, detailIndex) => (
-															<li className={`flex gap-3 ${detailIndex > 1 ? 'max-[390px]:hidden' : ''}`} key={detail}>
+															<li className={`flex gap-3 ${detailIndex > 1 ? 'max-[560px]:hidden' : ''}`} key={detail}>
 																<span className="mt-[0.58em] size-2 shrink-0 rounded-full bg-[#F59E42]" />
 																<span>{detail}</span>
 															</li>
 														))}
 													</ul>
-													<BadgeList items={project.tools} variant="primary" />
+													<div className="max-[390px]:hidden">
+														<BadgeList items={project.tools} variant="primary" />
+													</div>
 												</>
 											) : (
 												<p className="m-0 text-[0.92rem] font-bold leading-[1.35] text-white/82">
