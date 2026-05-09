@@ -18,6 +18,8 @@ const slides = [
 	{ id: 'contact', label: 'Contact', component: <ContactSlide /> },
 ] as const
 
+const resumeUrl = '/resume.pdf'
+
 export function PortfolioSwiper() {
 	const [activeIndex, setActiveIndex] = useState(0)
 	const [swiper, setSwiper] = useState<SwiperInstance | null>(null)
@@ -78,13 +80,14 @@ export function PortfolioSwiper() {
 					>
 						<SunIcon className="size-5 fill-none stroke-current [stroke-linecap:round] [stroke-linejoin:round] [stroke-width:2]" />
 					</button>
-					<button
-						className="inline-flex h-[50px] min-w-36 cursor-pointer items-center justify-center gap-4 rounded-[14px] border border-transparent bg-[#1A73E8] px-[22px] font-sans text-[0.98rem] font-extrabold text-white shadow-[0_14px_26px_rgba(26,115,232,0.24)] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[#1A73E8]/25"
-						type="button"
+					<a
+						className="inline-flex h-[50px] min-w-36 cursor-pointer items-center justify-center gap-4 rounded-[14px] border border-transparent bg-[#1A73E8] px-[22px] font-sans text-[0.98rem] font-extrabold text-white no-underline shadow-[0_14px_26px_rgba(26,115,232,0.24)] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[#1A73E8]/25"
+						download="Evander-Wines-Resume.pdf"
+						href={resumeUrl}
 					>
 						Resume
 						<DownloadIcon className="size-5 fill-none stroke-current [stroke-linecap:round] [stroke-linejoin:round] [stroke-width:2]" />
-					</button>
+					</a>
 				</div>
 			</nav>
 
@@ -127,6 +130,16 @@ export function PortfolioSwiper() {
 					<ChevronDown className="size-5" />
 				</button>
 			</div>
+
+			<a
+				aria-label="Download resume"
+				className="fixed bottom-4 left-4 z-50 inline-flex min-h-10 items-center gap-2 rounded-full border border-slate-700/10 bg-white/92 px-4 text-[0.82rem] font-extrabold text-[#1A73E8] no-underline shadow-[0_12px_28px_rgba(15,23,42,0.16)] backdrop-blur active:scale-95 min-[981px]:hidden"
+				download="Evander-Wines-Resume.pdf"
+				href={resumeUrl}
+			>
+				<DownloadIcon className="size-4 fill-none stroke-current [stroke-linecap:round] [stroke-linejoin:round] [stroke-width:2]" />
+				Resume
+			</a>
 
 			<Swiper
 				a11y={{ enabled: true }}
