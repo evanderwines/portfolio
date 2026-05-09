@@ -73,13 +73,13 @@ export function PortfolioSwiper() {
 				</div>
 
 				<div className="flex items-center justify-end gap-5 max-[980px]:hidden">
-					<button
+					{/* <button
 						aria-label="Toggle color theme"
 						className="inline-flex h-[50px] w-[58px] cursor-pointer items-center justify-center rounded-2xl border border-slate-700/10 bg-white/80 text-[#111827] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[#1A73E8]/25"
 						type="button"
 					>
 						<SunIcon className="size-5 fill-none stroke-current [stroke-linecap:round] [stroke-linejoin:round] [stroke-width:2]" />
-					</button>
+					</button> */}
 					<a
 						className="inline-flex h-[50px] min-w-36 cursor-pointer items-center justify-center gap-4 rounded-[14px] border border-transparent bg-[#1A73E8] px-[22px] font-sans text-[0.98rem] font-extrabold text-white no-underline shadow-[0_14px_26px_rgba(26,115,232,0.24)] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[#1A73E8]/25"
 						download="Evander-Wines-Resume.pdf"
