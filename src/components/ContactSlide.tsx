@@ -35,7 +35,7 @@ export function ContactSlide() {
               rel="noreferrer"
             >
               <GithubIcon className="size-5 fill-current" />
-              Samaneso
+              Evander Wines
               <ExternalLinkIcon className="size-5 fill-none stroke-current [stroke-linecap:round] [stroke-linejoin:round] [stroke-width:2]" />
             </a>
           </InfoCard>

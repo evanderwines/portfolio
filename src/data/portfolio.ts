@@ -3,7 +3,7 @@ export const portfolio = {
 		name: 'Evander V. Wines',
 		address: 'M79 St. Sta. Lucia, Pasig City',
 		email: 'winesevander@gmail.com',
-		github: 'https://github.com/Samaneso',
+		github: 'https://github.com/evanderwines',
 	},
 	summary:
 		'Innovative Computer Science student building practical web systems with a focus on clean interfaces and reliable application logic.',
