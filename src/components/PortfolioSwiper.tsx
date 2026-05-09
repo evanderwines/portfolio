@@ -37,7 +37,7 @@ export function PortfolioSwiper() {
 					aria-label="Evander V. Wines"
 				>
 					<span className="inline-flex size-[46px] items-center justify-center font-sans text-[1.42rem] font-black tracking-[-0.08em] text-[#1A73E8]">
-						EV
+						EVW
 					</span>
 					<span className="truncate font-sans text-[1.08rem] font-extrabold text-[#101828]">
 						Evander V. Wines
