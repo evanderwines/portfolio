@@ -7,7 +7,7 @@ import { AboutSlide } from './AboutSlide'
 import { ContactSlide } from './ContactSlide'
 import { ExperienceSlide } from './ExperienceSlide'
 import { HeroSlide } from './HeroSlide'
-import { DownloadIcon, SunIcon } from './Icons'
+import { DownloadIcon } from './Icons'			
 import { ProjectsSlide } from './ProjectsSlide'
 
 const slides = [
@@ -73,7 +73,7 @@ export function PortfolioSwiper() {
 				</div>
 
 				<div className="flex items-center justify-end gap-5 max-[980px]:hidden">
-					{/* <button
+					{/* <button	
 						aria-label="Toggle color theme"
 						className="inline-flex h-[50px] w-[58px] cursor-pointer items-center justify-center rounded-2xl border border-slate-700/10 bg-white/80 text-[#111827] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[#1A73E8]/25"
 						type="button"

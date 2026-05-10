@@ -67,7 +67,7 @@ export function GraduationIcon(props: IconProps) {
     </svg>
   )
 }
-
+    
 export function SunIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" {...props}>
